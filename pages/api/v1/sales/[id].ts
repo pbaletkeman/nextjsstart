@@ -4,9 +4,13 @@ import { StatusCodes } from "http-status-codes";
 
 type ResponseData = {
   message: string;
+  url: string;
 };
 
-export default function IDHandler(req: NextApiRequest, res: NextApiResponse<ResponseData>) {
+export default function IDHandler(
+  req: NextApiRequest,
+  res: NextApiResponse<ResponseData>
+) {
   const queryString = req.query;
   console.log("queryString");
   console.log(queryString);
@@ -15,16 +19,16 @@ export default function IDHandler(req: NextApiRequest, res: NextApiResponse<Resp
   }
   if (req.method === "POST") {
     // Process a POST request
-    res.status(StatusCodes.CREATED).json({ message: "POST" });
+    res.status(StatusCodes.CREATED).json({ message: "POST", url: queryString });
     console.log("POST");
   } else if (req.method === "GET") {
     // Process a GET request
-    res.status(StatusCodes.OK).json({ message: "GET" });
+    res.status(StatusCodes.OK).json({ message: "GET", url: queryString });
     console.log("GET");
   } else if (req.method === "PUT") {
     // Process a PUT request
     console.log("PUT");
-    res.status(StatusCodes.ACCEPTED).json({ message: "PUT" });
+    res.status(StatusCodes.ACCEPTED).json({ message: "PUT", url: queryString });
   } else if (req.method === "DELETE") {
     // Process a DELETE request
     console.log("DELETE");
