@@ -2,15 +2,17 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 import { StatusCodes } from "http-status-codes";
 
+import * as db from "db/index";
+
 type ResponseData = {
   message: string;
   url: string;
 };
 
-export default function HelloTest(
-  req: NextApiRequest,
-  res: NextApiResponse<ResponseData>
-) {
+export default async function HelloTest(req: NextApiRequest, res: NextApiResponse<ResponseData>) {
+  const result = await db.query("SELECT NOW()");
+  console.log(result);
+
   const queryString = req.query;
   console.log("queryString");
   console.log(queryString);
